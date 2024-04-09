@@ -10,21 +10,30 @@ const char* strCategory[] = { "PROSE", "POESY" , "SCIENCE" ,
 
 CARD_INDEX* LibraryOFBooks() {
     CARD_INDEX* card = new CARD_INDEX;
-    card->pB = new BOOK[card->capacity];
+    card->pB = new BOOK*[card->capacity];
+    for ( int i =0; i < card->capacity; i++){
+        card->pB[i] = new BOOK[card->count];
+    }
     card->count = 0;
     return card;
 }
 void addBook(CARD_INDEX*& pCard) {
     if (pCard->count == pCard->capacity) {
         pCard->capacity += 5;
-        BOOK* newarr = new BOOK[pCard->capacity];
-
-
-        for (int i = 0; i < pCard->count; i++) {
-            newarr[i] = pCard->pB[i];
+        BOOK** newarr = new BOOK*[pCard->capacity];
+        for (int i =0; i< pCard->capacity; i++){
+            newarr[i] = new BOOK[pCard->capacity];
         }
 
+        for (int i = 0; i < pCard->count; i++) {
+            for ( int j =0; j < pCard->count; j++){
+            newarr[i][j] = pCard->pB[i][j]; }
+        }
 
+        for ( int i =0; i < pCard->count; i++){
+            delete [] pCard->pB[i];
+
+        }
         delete[] pCard->pB;
 
 
@@ -32,7 +41,7 @@ void addBook(CARD_INDEX*& pCard) {
     }
 
 
-    FillBook(&pCard->pB[pCard->count]);
+    FillBook(pCard->pB);
 
 
     pCard->count++;
@@ -119,30 +128,31 @@ void deleteBook(CARD_INDEX* pCard) {
      }}
 
 }
-void PrintBook(BOOK* ptr) {
+void PrintBook(BOOK** ptr) {
+    BOOK *ptr1 = *ptr;
     std::cout << "Автор книги: \n";
-    std::cout << ptr->author;
+    std::cout << ptr1->author;
     std::cout << std::endl;
     std::cout << "Название книги: \n";
-    std::cout << ptr->name;
+    std::cout << ptr1->name;
     std::cout << std::endl;
     std::cout << "Год издания книги: \n";
-    std::cout << ptr->year;
+    std::cout << ptr1->year;
     std::cout << std::endl;
     std::cout << "Стоимость книги в рублях: \n";
-    std::cout << ptr->price;
+    std::cout << ptr1->price;
     std::cout << std::endl;
     std::cout << "Тип книги: \n";
-    if (ptr->category == PROSE) {
+    if (ptr1->category == PROSE) {
         std::cout << strCategory[0];
     }
-    else if (ptr->category == POETRY) {
+    else if (ptr1->category == POETRY) {
         std::cout << strCategory[1];
     }
-    else if (ptr->category == SCIENCE) {
+    else if (ptr1->category == SCIENCE) {
         std::cout << strCategory[2];
     }
-    else if (ptr->category == UNDEF) {
+    else if (ptr1->category == UNDEF) {
         std::cout << strCategory[3];
     }
 
@@ -226,7 +236,7 @@ void ReadFromFile(CARD_INDEX* ptr) {
                 resize(ptr);
             }
 
-            ptr->pB[ptr->count++] =  newbook;
+           // ptr->pB[ptr->count++] =  newbook;
             count--;
         }
 
@@ -278,20 +288,20 @@ void WriteToFile(CARD_INDEX* ptr) {
             std::cout << "Файл успешно открыт, проверьте его\n";
             file << ptr->count << "\n";
             for (int i = 0; i < ptr->count; i++) {
-                BOOK *current = &(ptr->pB[i]);
-                file << current->author << "\n";
-                file << current->name << "\n";
-                file << current->year << "\n";
-                file << current->price << "\n";
-                if (current->category == PROSE) {
-                    file << strCategory[0];
-                } else if (current->category == POETRY) {
-                    file << strCategory[1];
-                } else if (current->category == SCIENCE) {
-                    file << strCategory[2];
-                } else if (current->category == UNDEF) {
-                    file << strCategory[3];
-                }
+//                BOOK **current = &(ptr->pB[i]);
+//                file << current->author << "\n";
+//                file << current->name << "\n";
+//                file << current->year << "\n";
+//                file << current->price << "\n";
+//                if (current->category == PROSE) {
+//                    file << strCategory[0];
+//                } else if (current->category == POETRY) {
+//                    file << strCategory[1];
+//                } else if (current->category == SCIENCE) {
+//                    file << strCategory[2];
+//                } else if (current->category == UNDEF) {
+//                    file << strCategory[3];
+//                }
                 file << '\n';
 
             }
@@ -381,15 +391,15 @@ void resize(CARD_INDEX * pCard)
     pCard->capacity += 5;
     BOOK* newarr = new BOOK[pCard->capacity];
 
-    for (int i = 0; i < pCard->count; i++) {
-        newarr[i] = pCard->pB[i];
-    }
+//    for (int i = 0; i < pCard->count; i++) {
+//        newarr[i] = pCard->pB[i];
+//    }
 
 
     delete[] pCard->pB;
 
 
-    pCard->pB = newarr;
+   //pCard->pB = newarr;
 
 
 }

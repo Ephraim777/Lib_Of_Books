@@ -1,15 +1,16 @@
 
 #include "book.h"
 
- void FillBook( BOOK *book) {
+ void FillBook( BOOK **book) {
+    BOOK * ptr = *book;
     std::cout << "Введите автора книги 30 символов\n";
     std::cin.ignore(1);
-    std::cin.getline(book->author, 30);
+    std::cin.getline(ptr->author, 30);
     std::cout << "Введите название книги 80 символов\n";
 
-    std::cin.getline(book->name, 80);
+    std::cin.getline(ptr->name, 80);
     std::cout << "Введите год издания книги\n";
-    std::cin >> book->year;
+    std::cin >> ptr->year;
     bool inputnum = false;
     while (inputnum != true) {
 
@@ -18,7 +19,7 @@
             std::cout << "Упс, похоже вы ввели не цыфру, попробуем еще раз!!\n";
             std::cin.clear();
             std::cin.ignore(999999999999, '\n');
-            std::cin >> book->year;
+            std::cin >> ptr->year;
         } else {
 
 
@@ -28,7 +29,7 @@
         }
     }
     std::cout << "Введите стоимость книги в рублях\n";
-    std::cin >> book->price;
+    std::cin >> ptr->price;
     bool inputnum1 = false;
     while (inputnum1 != true) {
 
@@ -37,7 +38,7 @@
             std::cout << "Упс, похоже вы ввели не число, попробуем еще раз!!\n";
             std::cin.clear();
             std::cin.ignore(999999999999, '\n');
-            std::cin >> book->price;
+            std::cin >> ptr->price;
         } else {
 
 
@@ -51,16 +52,16 @@
     std::cin >> num;
     switch (num) {
         case 0:
-            book->category = PROSE;
+            ptr->category = PROSE;
             break;
         case 1:
-            book->category = POETRY;
+            ptr->category = POETRY;
             break;
         case 2:
-            book->category = SCIENCE;
+            ptr->category = SCIENCE;
             break;
         case 3:
-            book->category = UNDEF;
+            ptr->category = UNDEF;
             break;
         default:
             bool number = false;

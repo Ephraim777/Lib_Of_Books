@@ -11,7 +11,7 @@
 struct CARD_INDEX{
     size_t count = 0;
     size_t capacity= 1;
-    BOOK *pB=nullptr;
+    BOOK **pB=nullptr;
 };
 
 CARD_INDEX* LibraryOFBooks();

@@ -24,6 +24,6 @@ struct BOOK
 
 
 };
-void FillBook(BOOK *book);
+void FillBook(BOOK **book);
 
 #endif //UNTITLED10_BOOK_H
