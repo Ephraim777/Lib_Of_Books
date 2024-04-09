@@ -12,7 +12,7 @@ CARD_INDEX* LibraryOFBooks() {
     CARD_INDEX* card = new CARD_INDEX;
     card->pB = new BOOK*[card->capacity];
     for ( int i =0; i < card->capacity; i++){
-        card->pB[i] = new BOOK[card->count];
+        card->pB[i] = new BOOK[card->capacity];
     }
     card->count = 0;
     return card;
@@ -41,7 +41,7 @@ void addBook(CARD_INDEX*& pCard) {
     }
 
 
-    FillBook(pCard->pB);
+    FillBook(&pCard->pB[pCard->count]);
 
 
     pCard->count++;
@@ -236,7 +236,7 @@ void ReadFromFile(CARD_INDEX* ptr) {
                 resize(ptr);
             }
 
-           // ptr->pB[ptr->count++] =  newbook;
+            ptr->pB[ptr->count++] =  &newbook;
             count--;
         }
 
