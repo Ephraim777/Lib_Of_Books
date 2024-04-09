@@ -288,20 +288,22 @@ void WriteToFile(CARD_INDEX* ptr) {
             std::cout << "Файл успешно открыт, проверьте его\n";
             file << ptr->count << "\n";
             for (int i = 0; i < ptr->count; i++) {
-//                BOOK **current = &(ptr->pB[i]);
-//                file << current->author << "\n";
-//                file << current->name << "\n";
-//                file << current->year << "\n";
-//                file << current->price << "\n";
-//                if (current->category == PROSE) {
-//                    file << strCategory[0];
-//                } else if (current->category == POETRY) {
-//                    file << strCategory[1];
-//                } else if (current->category == SCIENCE) {
-//                    file << strCategory[2];
-//                } else if (current->category == UNDEF) {
-//                    file << strCategory[3];
-//                }
+               BOOK **ptr1 = &(ptr->pB[i]);
+               BOOK * current = *ptr1;
+               file << current->author << "\n";
+               file << current->name << "\n";
+               file << current->year << "\n";
+
+                file << current->price << "\n";
+                if (current->category == PROSE) {
+                    file << strCategory[0];
+                } else if (current->category == POETRY) {
+                   file << strCategory[1];
+               } else if (current->category == SCIENCE) {
+                   file << strCategory[2];
+                    } else if (current->category == UNDEF) {
+                    file << strCategory[3];
+                }
                 file << '\n';
 
             }
@@ -380,26 +382,32 @@ void menu(CARD_INDEX* ptr) {
 
 }
 void DeleteLibrary(CARD_INDEX* ptr) {
-
+for ( int i = 0; i <ptr->count; i++){
+    delete [] ptr->pB[i];
+    ptr->pB[i] = nullptr;
+}
     delete[] ptr->pB;
-    delete ptr;
     ptr = nullptr;
 }
 
 void resize(CARD_INDEX * pCard)
 {
     pCard->capacity += 5;
-    BOOK* newarr = new BOOK[pCard->capacity];
+    BOOK** newarr = new BOOK*[pCard->capacity];
+    for (int i =0; i< pCard->capacity; i++){
+        newarr[i] = new BOOK[pCard->capacity];
+    }
 
-//    for (int i = 0; i < pCard->count; i++) {
-//        newarr[i] = pCard->pB[i];
-//    }
+    for (int i = 0; i < pCard->count; i++) {
+        for ( int j =0; j < pCard->count; j++){
+            newarr[i][j] = pCard->pB[i][j]; }
+    }
 
+    for ( int i =0; i < pCard->count; i++){
+        delete [] pCard->pB[i];
 
+    }
     delete[] pCard->pB;
-
-
-   //pCard->pB = newarr;
-
+    pCard->pB = newarr;
 
 }
