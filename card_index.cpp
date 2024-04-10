@@ -207,9 +207,9 @@ void ReadFromFile(CARD_INDEX* ptr) {
         std::cout << "Файл успешно открыт,считываем информацию с файла.... \n";
         int count;
         file >> count;
-        BOOK * newbook = new BOOK;
-        while (count) {
 
+        while (count) {
+            BOOK * newbook = new BOOK;
             file.ignore(1);
             file.getline( newbook->author, 40);
             file.getline( newbook->name,80);
