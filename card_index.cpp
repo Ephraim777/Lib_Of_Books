@@ -207,27 +207,27 @@ void ReadFromFile(CARD_INDEX* ptr) {
         std::cout << "Файл успешно открыт,считываем информацию с файла.... \n";
         int count;
         file >> count;
-        BOOK newbook;
+        BOOK * newbook = new BOOK;
         while (count) {
 
             file.ignore(1);
-            file.getline( newbook.author, 40);
-            file.getline( newbook.name,80);
-            file >> newbook.year;
-            file >> newbook.price;
+            file.getline( newbook->author, 40);
+            file.getline( newbook->name,80);
+            file >> newbook->year;
+            file >> newbook->price;
             string categoryStr;
             file >> categoryStr;
             if (categoryStr == strCategory[0]) {
-                newbook.category = PROSE;
+                newbook->category = PROSE;
             }
             else if (categoryStr == strCategory[1]) {
-                newbook.category = POETRY;
+                newbook->category = POETRY;
             }
             else if (categoryStr == strCategory[2]) {
-                newbook.category = SCIENCE;
+                newbook->category = SCIENCE;
             }
             else {
-                newbook.category = UNDEF;
+                newbook->category = UNDEF;
             }
 
 
@@ -236,7 +236,7 @@ void ReadFromFile(CARD_INDEX* ptr) {
                 resize(ptr);
             }
 
-            ptr->pB[ptr->count++] =  &newbook;
+            ptr->pB[ptr->count++] =  newbook;
             count--;
         }
 
