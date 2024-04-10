@@ -14,4 +14,4 @@
 ### В нём есть PDF файл где указано 2-да варианта кода
 ### В ветке main указан простой вариант :)
 ### В ветке second указать варинат поинтересней :)
-[Click on me](path/to/your/pdf/file.pdf)
+[Click on me](https://github.com/Ephraim777/LibraryOFBooks1/blob/fd96d528225ef6c71311221fba038ff0bd18b2b4/Card.pdf)
