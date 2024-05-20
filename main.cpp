@@ -6,10 +6,10 @@ using namespace std;
 
 int main() {
 
-    CARD_INDEX *ptr =LibraryOFBooks();
-  menu(ptr);
-  DeleteLibrary(ptr);
+	CARD_INDEX* ptr = LibraryOFBooks();
+	menu(ptr);
+	DeleteLibrary(ptr);
 
 
-    return 0;
+	return 0;
 }

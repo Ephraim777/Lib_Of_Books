@@ -1,6 +1,4 @@
-//
-// Created by nikita on 02.04.24.
-//
+
 
 #ifndef UNTITLED10_CARD_INDEX_H
 #define UNTITLED10_CARD_INDEX_H
@@ -25,4 +23,4 @@ void addBook(CARD_INDEX *&pCard);
 void deleteBook(CARD_INDEX *pCard);
 void DeleteLibrary(CARD_INDEX *ptr);
 
-#endif //UNTITLED10_CARD_INDEX_Hf //UNTITLED10_CARD_INDEX_H
+#endif 
